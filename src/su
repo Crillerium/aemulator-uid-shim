@@ -1,0 +1,18 @@
+#!/system/bin/sh
+# AEmulator UID compatibility shim. This is not Magisk and does not provide a
+# real kernel-root transition.
+
+case "${1-}" in
+    -v|--version)
+        echo "AEmulator UID shim 1.1.0 (not Magisk)"
+        exit 0
+        ;;
+    -h|--help)
+        echo "Usage: su [-v] | su -c COMMAND | su [COMMAND [ARG...]]"
+        exit 0
+        ;;
+esac
+
+CLASSPATH=/system/framework/aemu-su.jar
+export CLASSPATH
+exec /system/bin/app_process /system/bin aemu.su.Main "$@"
